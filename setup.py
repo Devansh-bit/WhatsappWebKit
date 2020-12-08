@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name='WhatsappWebKit',
     packages=find_packages(include=['WhatsappWebKit']),
-    version='0.2.0',
+    version='1.0.0',
     description='A small library helpful for manipulating whatsapp web using selenium',
     author='Devansh Gupta',
     setup_requires=['pytest-runner'],
