@@ -50,37 +50,30 @@ class Utils(Locators.window):
 
     def wait_for_new_message(self):
         """Might not function as expected if the window is being manually interacted with. To be fixed soon."""
-        #replace for with while true, and remove driver.find_element().click() try except if not fucntioning
         try:
-            while True:#this too
-                self.driver.execute_script("window.focus();") #this too
-                last_message_id = self.get_loaded_messages()[-1].get_attribute("data-id")
-                last_top_chat_name = self.get_top_chat().find_element_by_xpath(
-                    ".//span[@class='_1hI5g _1XH7x _1VzZY' and @dir='auto']").get_attribute("title")
-                for i in range (200):#replace with while true
-                    time.sleep(0.1)
-                    try:
-                        self.driver.find_element_by_xpath("""//span[@class="VOr2j"]""").click() #this remove if not working
-                    except:
-                        pass
-                    try:
-                        new_message = self.get_loaded_messages()[-1]
-                        current_chat_name = self.get_top_chat().find_element_by_xpath(
-                            ".//span[@class='_1hI5g _1XH7x _1VzZY' and @dir='auto']").get_attribute("title")
-                        if last_message_id != new_message.get_attribute("data-id"):
-                            return new_message
-                        if last_top_chat_name != current_chat_name:
-                            self.get_top_chat().click()
-                            return self.get_loaded_messages()[-1]
+            last_message_id = self.get_loaded_messages()[-1].get_attribute("data-id")
+            last_top_chat_name = self.get_top_chat().find_element_by_xpath(
+                ".//span[@class='_1hI5g _1XH7x _1VzZY' and @dir='auto']").get_attribute("title")
+            while True:
+                time.sleep(0.1)
+                try:
+                    new_message = self.get_loaded_messages()[-1]
+                    current_chat_name = self.get_top_chat().find_element_by_xpath(
+                        ".//span[@class='_1hI5g _1XH7x _1VzZY' and @dir='auto']").get_attribute("title")
+                    if last_message_id != new_message.get_attribute("data-id"):
+                        return new_message
+                    if last_top_chat_name != current_chat_name:
+                        self.get_top_chat().click()
+                        return self.get_loaded_messages()[-1]
 
-                        # try:
-                        # self.driver.find_element_by_xpath("""//span[@class="VOr2j"]""").click()
-                        # except NoSuchElementException:
-                        # continue
-                        # return self.get_unread_messages_from_current_chat()[0]
+                    # try:
+                    # self.driver.find_element_by_xpath("""//span[@class="VOr2j"]""").click()
+                    # except NoSuchElementException:
+                    # continue
+                    # return self.get_unread_messages_from_current_chat()[0]
 
-                    except:
-                        continue
+                except:
+                    continue
         except:
             print("Unexpected Error! (Ex0987)")
             sys.exit()
