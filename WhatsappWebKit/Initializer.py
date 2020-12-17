@@ -24,7 +24,7 @@ def create_meet_driver(path_to_chromedriver):
     driver = webdriver.Chrome(executable_path=path_to_chromedriver, chrome_options=opt)
     return driver
 class WebDriver(Utils.Utils, GoogleMeet.GoogleMeet):
-    """This is the main object to be manipulated
+    """This is the main class to be manipulated
        Create a driver object using Initializer.create_driver() and pass the object"""
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
