@@ -30,7 +30,7 @@ class window:
     def get_chat_by_name(self, name):
         """Returns the chat element with the specified element"""
         try:
-            return Elements.ChatElement(self.driver.find_element_by_xpath("//div[@class='1MZWu'][.//span[@title='{}']]".format(name)))
+            return Elements.ChatElement(self.driver.find_element_by_xpath("//div[@class='_1MZWu'][.//span[@title='{}']]".format(name)))
         except:
             print("Chat by name {} not found!".format(name))
 

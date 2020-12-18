@@ -1,7 +1,12 @@
 import time
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
+from WhatsappWebKit.Elements import MessageElement
 from WhatsappWebKit import Locators
 
 
@@ -21,7 +26,7 @@ class Utils(Locators.window):
                 else:
                     continue
             except:
-                print("An unexpected error occured! (ele_stale)")
+                print("Error encountered (0x001)")
                 continue
 
     def wait_for_new_message(self, wait=0):
@@ -43,4 +48,6 @@ class Utils(Locators.window):
                 except:
                     continue
         except:
-            print("Unexpected Error! (Ex0987)")
+            print("Unexpected Error! (0x002)")
+
+
