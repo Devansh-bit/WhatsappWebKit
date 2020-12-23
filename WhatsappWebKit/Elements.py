@@ -1,12 +1,8 @@
 import time
+
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class ChatElement(WebElement):
@@ -24,7 +20,6 @@ class ChatElement(WebElement):
 
     def get_loaded_messages(self):
         """Returns all loaded messages and tags in the current chat"""
-        self.chat.click()
         messages = []
         for message in self.chat.find_elements(By.XPATH, """//*[@id="main"]/div[3]/div/div/div[3]/*"""):
             messages.append(MessageElement(message))
@@ -55,6 +50,20 @@ class ChatElement(WebElement):
         #except NoSuchElementException:
         #    print("Couldn't send message!")
 
+    def wait_until_new_message(self):
+        """Waits until a new message is received in the current chat and returns a MessageElement"""
+        last_message_id = self.get_loaded_messages()[-1].get_attribute("data-id")
+        while True:
+            try:
+                new_message = self.get_loaded_messages()[-1]
+                if last_message_id != new_message.get_attribute("data-id"):
+                    return new_message
+                else:
+                    continue
+            except:
+                print("Error encountered (0x001)")
+                continue
+
 
 
 class MessageElement(WebElement):
@@ -72,6 +81,13 @@ class MessageElement(WebElement):
                                             ".//span[@class='_1VzZY selectable-text invisible-space copyable-text']/span").text
             except NoSuchElementException:
                 return "message_deleted"
+
+    def get_chat(self):
+        name = self.message.find_element_by_xpath(".//ancestor::div[@class='i5ly3 _2l_Ww']").find_element_by_xpath(".//span[@class='_1hI5g _1XH7x _1VzZY']").text
+        chat: ChatElement = ChatElement(self.message.find_element_by_xpath("//div[@class='_1MZWu'][.//span[@title='{}']]".format(name)))
+        return chat
+
+
 
 
 

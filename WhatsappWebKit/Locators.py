@@ -1,7 +1,10 @@
+from typing import List
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
 from WhatsappWebKit import Elements
 
 
@@ -47,3 +50,10 @@ class window:
         for message in self.driver.find_elements(By.XPATH, """//*[@id="main"]/div[3]/div/div/div[3]/*"""):
             messages.append(Elements.MessageElement(message))
         return messages
+
+    def get_loaded_chats(self):
+        chats: List[Elements.ChatElement] = self.driver.find_elements_by_xpath("//div[@class='_1MZWu']")
+        for i in range (len(chats)):
+            chats[i] = Elements.ChatElement(chats[i])
+
+        return chats

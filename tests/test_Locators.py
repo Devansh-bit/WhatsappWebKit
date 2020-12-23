@@ -23,6 +23,9 @@ window.get_top_chat().click()
 #print("going to sleep for {} seconds".format(time_to_sleep))
 #time.sleep(time_to_sleep)
 print("Waking up! Starting main thread")
+
+
+
 while True:
     driver.execute_script("window.focus();")
     message = window.wait_for_new_message()

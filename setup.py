@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='WhatsappWebKit',
-      version='1.0.4',
+      version='1.1.0',
       description='A small library helpful for manipulating whatsapp web using selenium',
       long_description=long_description,
       long_description_content_type="text/markdown",

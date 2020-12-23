@@ -1,17 +1,13 @@
-import sys
+import threading
+import time
+from datetime import datetime
 
-from selenium.webdriver import ActionChains
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import time
-from WhatsappWebKit import Utils
-from WhatsappWebKit import Locators
-from WhatsappWebKit import Initializer
-from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import threading
-from datetime import datetime
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 class GoogleMeet():
     def open_meet(self, meet_driver:webdriver.Chrome, meet_link, class_time):
