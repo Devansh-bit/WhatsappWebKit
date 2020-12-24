@@ -8,8 +8,10 @@ from WhatsappWebKit import GoogleMeet
 from WhatsappWebKit import Utils
 
 
-def create_driver(path_to_chromedriver, port = None):
-    """Create the driver used for whatsapp web with preset options."""
+def create_driver(path_to_chromedriver, port:int = None):
+    """Create the driver used for whatsapp web with preset options.
+       If the chromedriver.exe is in Path, put "chromedriver.exe" in path_to_chromedriver
+       Use the port to interact with pre-opened Chrome window"""
     opt = Options()
     opt.add_argument("start-maximized")
     opt.add_argument("--disable-extensions")
@@ -26,6 +28,7 @@ def create_driver(path_to_chromedriver, port = None):
     driver = webdriver.Chrome(path_to_chromedriver, chrome_options=opt)
     return driver
 def create_meet_driver(path_to_chromedriver):
+    """Creates a driver specifically for the GoogleMeet module"""
     opt = Options()
     opt.add_argument("start-maximized")
     opt.add_argument("--disable-extensions")

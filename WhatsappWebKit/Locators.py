@@ -52,6 +52,7 @@ class window:
         return messages
 
     def get_loaded_chats(self):
+        """Returns a list of all loaded chats in the left bar"""
         chats: List[Elements.ChatElement] = self.driver.find_elements_by_xpath("//div[@class='_1MZWu']")
         for i in range (len(chats)):
             chats[i] = Elements.ChatElement(chats[i])
