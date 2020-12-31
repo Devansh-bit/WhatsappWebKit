@@ -56,8 +56,7 @@ class ChatElement(WebElement):
         time.sleep(0.1)
         send_button = self.chat.find_element_by_xpath("//button[@class='_2Ujuu']")
         send_button.click()
-        #except NoSuchElementException:
-        #    print("Couldn't send message!")
+
 
     def wait_until_new_message(self):
         """Waits until a new message is received in the current chat and returns a MessageElement"""

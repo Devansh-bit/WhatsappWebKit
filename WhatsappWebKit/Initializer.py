@@ -24,7 +24,7 @@ def create_driver(path_to_chromedriver, port:int = None):
             "profile.default_content_setting_values.notifications": 1
         })
     else:
-        opt.add_experimental_option("debuggerAddress", "127.0.0.1:{}".format(port))
+        opt.add_experimental_option("debuggerAddress", "localhost:{}".format(port))
     driver = webdriver.Chrome(path_to_chromedriver, chrome_options=opt)
     return driver
 def create_meet_driver(path_to_chromedriver):
@@ -44,7 +44,8 @@ def create_meet_driver(path_to_chromedriver):
 class WebDriver(Utils.Utils, GoogleMeet.GoogleMeet):
     """This is the main class to be manipulated.
        Create a driver object using Initializer.create_driver() and pass the object"""
-    def __init__(self, driver:webdriver.Chrome):
+    def __init__(self, driver: webdriver.Chrome):
+        super().__init__(driver)
         self.driver = driver
         self.driver.get("https://web.whatsapp.com")
         WebDriverWait(self.driver, 90).until(EC.visibility_of_element_located((By.XPATH, """//*[@id="side"]/div[1]/div/label/div/div[2]""")))
