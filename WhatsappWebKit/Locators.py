@@ -15,7 +15,7 @@ class window:
     def get_top_chat(self):
         """Returns the top chat in the window"""
         element = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(
-            (By.XPATH, "//div[contains(@style,'translateY(0px)') and @class='_1MZWu']")))
+            (By.XPATH, "//div[contains(@style,'translateY(0px)') and @class='_2aBzC']")))
         return Elements.ChatElement(element)
 
     def get_unread_messages_from_current_chat(self):
@@ -29,20 +29,26 @@ class window:
             except:
                 continue
         return []
+    # TODO : Replace unread msg class
+
+
 
     def get_chat_by_name(self, name):
         """Returns the chat element with the specified element"""
         try:
-            return Elements.ChatElement(self.driver.find_element_by_xpath("//div[@class='_1MZWu'][.//span[@title='{}']]".format(name)))
+            return Elements.ChatElement(
+                self.driver.find_element_by_xpath("//div[@class='_2aBzC'][.//span[@title='{}']]".format(name)))
         except:
             print("Chat by name {} not found!".format(name))
 
     def get_chats_with_unread_messages(self):
         """Returns chats with unread messages using the green notification icon"""
         chats = []
-        for chat in self.driver.find_elements_by_xpath("//div[@class='_1MZWu'][.//span[@class='VOr2j']]"):
+        for chat in self.driver.find_elements_by_xpath("//div[@class='_2aBzC'][.//span[@class='VOr2j']]"):
             chats.append(Elements.ChatElement(chat))
         return chats
+
+    # TODO : Replace green unread mark class
 
     def get_loaded_messages(self):
         """Returns all loaded messages and tags in the current chat"""
@@ -53,8 +59,8 @@ class window:
 
     def get_loaded_chats(self):
         """Returns a list of all loaded chats in the left bar"""
-        chats: List[Elements.ChatElement] = self.driver.find_elements_by_xpath("//div[@class='_1MZWu']")
-        for i in range (len(chats)):
+        chats: List[Elements.ChatElement] = self.driver.find_elements_by_xpath("//div[@class='_2aBzC']")
+        for i in range(len(chats)):
             chats[i] = Elements.ChatElement(chats[i])
 
         return chats

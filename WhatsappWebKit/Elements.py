@@ -11,7 +11,7 @@ class ChatElement(WebElement):
     def __init__(self, chat: WebElement):
         """A WebElement that contains a whatsapp web chat"""
         super().__init__(chat.parent, chat.id)
-        if not chat.get_attribute("class") == "_1MZWu":
+        if not chat.get_attribute("class") == "_2aBzC":
             raise TypeError("Element is not a chat")
         self.chat = chat
 
@@ -50,11 +50,11 @@ class ChatElement(WebElement):
     def send_message(self, message:str):
         """Sends the given message to the chat"""
         self.chat.click()
-        text_box = self.chat.find_element_by_xpath("//div[@class='_1awRl copyable-text selectable-text' and @data-tab='6']")
+        text_box = self.chat.find_element_by_xpath("//div[@class='_2_1wd copyable-text selectable-text' and @data-tab='6']")
         text_box.click()
         text_box.send_keys(message)
         time.sleep(0.1)
-        send_button = self.chat.find_element_by_xpath("//button[@class='_2Ujuu']")
+        send_button = self.chat.find_element_by_xpath("//button[@class='_1E0Oz']")
         send_button.click()
 
 
@@ -86,14 +86,14 @@ class MessageElement(WebElement):
         if type(self.message) == WebElement:
             try:
                 return self.message.find_element(By.XPATH,
-                                            ".//span[@class='_1VzZY selectable-text invisible-space copyable-text']/span").text
+                                            ".//span[@class='_3-8er selectable-text copyable-text']/span").text
             except NoSuchElementException:
                 return "message_deleted"
 
     def get_chat(self):
         """Returns a chat element from the message element"""
-        name = self.message.find_element_by_xpath(".//ancestor::div[@class='i5ly3 _2l_Ww']").find_element_by_xpath(".//span[@class='_1hI5g _1XH7x _1VzZY']").text
-        chat: ChatElement = ChatElement(self.message.find_element_by_xpath("//div[@class='_1MZWu'][.//span[@title='{}']]".format(name)))
+        name = self.message.find_element_by_xpath(".//ancestor::div[@class='_1Flk2 _1sFTb']").find_element_by_xpath(".//span[@class='_35k-1 _1adfa _3-8er']").text
+        chat: ChatElement = ChatElement(self.message.find_element_by_xpath("//div[@class='_2aBzC'][.//span[@title='{}']]".format(name)))
         return chat
 
     def delete(self, everyone=False):
@@ -101,9 +101,9 @@ class MessageElement(WebElement):
            use everyone=True for deleting messages for everyone"""
         self.message.click()
         self.message.send_keys(Keys.ARROW_RIGHT)
-        self.message.find_element_by_xpath("//div[@title='Delete message']").click()
+        self.message.find_element_by_xpath("//div[@aria-label='Delete message']").click()
         try:
-            self.message.find_element_by_xpath('//div[@class="_30EVj gMRg5"]').click()
+            self.message.find_element_by_xpath('//div[@class="_1dwBj _3xWLK"]').click()
         except:
             if not everyone:
                 self.message.find_element_by_xpath('//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[3]/div/div[1]/div').click()
@@ -116,7 +116,7 @@ class MessageElement(WebElement):
         self.message.click()
         self.message.send_keys(Keys.ARROW_RIGHT)
         try:
-            self.message.find_element_by_xpath("//div[@title='Reply']").click()
+            self.message.find_element_by_xpath("//div[@aria-label='Reply']").click()
         except NoSuchElementException:
             raise Exception("Message has been been deleted")
         if text is not None:

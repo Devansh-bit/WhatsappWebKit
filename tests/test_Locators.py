@@ -13,7 +13,7 @@ chromedriver_autoinstaller.install()
 #print(time_to_sleep/3600, " hours")
 
 
-driver = Initializer.create_driver("chromedriver.exe")
+driver = Initializer.create_driver("chromedriver.exe", 2222)
 window = Initializer.WebDriver(driver)
 #meet_driver = Initializer.create_meet_driver("chromedriver.exe")
 #window.meet_sign_in(meet_driver, "your_email_here@host.com")
@@ -26,11 +26,7 @@ print("Waking up! Starting main thread")
 
 
 
-while True:
-    driver.execute_script("window.focus();")
-    message = window.wait_for_new_message()
-    message.delete(driver)
-    print(message.get_text())
+window.get_chat_by_name('bruh').send_message("hi")
     #if "https://meet.google.com/" in message:
         #window.open_meet(meet_driver, (re.search("(?P<url>https?://[^\s]+)", text).group("url")), class_time=40)
 
